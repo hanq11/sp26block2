@@ -1,5 +1,6 @@
 package com.example.sd21101sof3012.buoi1.util;
 
+import com.example.sd21101sof3012.buoi1.entity.SinhVien;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -24,6 +25,7 @@ public class HibernateConfig {
 
 //        conf.addAnnotatedClass(PhongKham.class);
 //        conf.addAnnotatedClass(BacSi.class);
+        conf.addAnnotatedClass(SinhVien.class);
         conf.setProperties(properties);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
