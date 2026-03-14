@@ -15,4 +15,30 @@ public class SinhVienRepository {
     public List<SinhVien> getAll() {
         return session.createQuery("FROM SinhVien sv").list();
     }
+
+    public void themSinhVien(SinhVien sinhVien) {
+        try {
+            session.getTransaction().begin();
+            session.save(sinhVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    public SinhVien getById(Integer id) {
+        return session.find(SinhVien.class, id);
+    }
+
+    public void xoaSinhVien(Integer id) {
+        try {
+            session.getTransaction().begin();
+            session.delete(this.getById(id));
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
 }
