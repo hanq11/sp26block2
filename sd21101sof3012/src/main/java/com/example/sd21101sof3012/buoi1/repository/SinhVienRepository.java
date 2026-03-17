@@ -41,4 +41,15 @@ public class SinhVienRepository {
             session.getTransaction().rollback();
         }
     }
+
+    public void suaSinhVien(SinhVien sinhVien) {
+        try {
+            session.getTransaction().begin();
+            session.merge(sinhVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
 }

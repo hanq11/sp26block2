@@ -40,6 +40,7 @@
                     <td>${sv.gioiTinh == true ? "Nam" : "Nu"}</td>
                     <td>
                         <a href="/sinh-vien/xoa?id=${sv.id}">Xoa</a>
+                        <a href="/sinh-vien/view-update?id=${sv.id}">View update</a>
                     </td>
                 </tr>
             </c:forEach>
