@@ -26,7 +26,13 @@ public class SinhVienController {
         return sinhVienRepository.findSinhViensByTenContains(ten);
     }
 
-
+    @GetMapping("/test")
+    public List<SinhVien> test(
+            @RequestParam("batDau") String batDau,
+            @RequestParam("ketThuc") String ketThuc
+    ) {
+        return sinhVienRepository.timKiemTheoKhoangNgaySinh(batDau, ketThuc);
+    }
     @PostMapping("/them")
     public String themSinhVien(@RequestBody SinhVien sinhVien) {
         sinhVienRepository.save(sinhVien);
