@@ -16,7 +16,7 @@ import java.util.List;
 public class SinhVienRepository {
     private String getAllSQL = "SELECT id, ten, tuoi, gioi_tinh as gioiTinh FROM sinh_vien";
     
-    private String insertSQL = "INSERT INTO sinh_vien SET ten = ?, tuoi = ?, gioi_tinh = ?";
+    private String insertSQL = "INSERT INTO sinh_vien (ten, tuoi, gioi_tinh) VALUES (?, ?, ?)";
     
     private String updateSQL = "UPDATE sinh_vien SET ten = ?, tuoi = ?, gioi_tinh = ? WHERE id = ?";
     

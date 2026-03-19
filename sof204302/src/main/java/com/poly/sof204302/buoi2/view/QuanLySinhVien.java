@@ -28,6 +28,7 @@ public class QuanLySinhVien extends javax.swing.JFrame {
     }
 
     public void loadTableData(List<SinhVien> list) {
+        dtmSinhVien.setRowCount(0);
         list.forEach(sv -> {
             dtmSinhVien.addRow(new Object[] {
                 sv.getId(),
@@ -46,7 +47,7 @@ public class QuanLySinhVien extends javax.swing.JFrame {
         
         if(rdoNu.isSelected()) {
             gioiTinh = false;
-        }
+        } 
         return new SinhVien(id, ten, tuoi, gioiTinh);
                 
     }
@@ -114,6 +115,11 @@ public class QuanLySinhVien extends javax.swing.JFrame {
         });
 
         btnSua.setText("Sua");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +197,9 @@ public class QuanLySinhVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        Integer id = Integer.valueOf(txtId.getText());
+        svrp.delete(id);
+        loadTableData(svrp.getAll());
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSinhVienMouseClicked
@@ -207,7 +215,14 @@ public class QuanLySinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_tblSinhVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        svrp.insert(getFormData());
+        loadTableData(svrp.getAll());
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        svrp.update(getFormData());
+        loadTableData(svrp.getAll());
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
