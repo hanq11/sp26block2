@@ -3,6 +3,7 @@ package com.example.sd21101sof3012.buoi1.repository;
 import com.example.sd21101sof3012.buoi1.entity.SinhVien;
 import com.example.sd21101sof3012.buoi1.util.HibernateConfig;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -51,5 +52,12 @@ public class SinhVienRepository {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+    }
+
+    public List<SinhVien> phanTrang(int page, int pageSize) {
+        Query query = session.createQuery("FROM SinhVien sv");
+        query.setFirstResult(page * pageSize);
+        query.setMaxResults(pageSize);
+        return query.list();
     }
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
         "/sinh-vien/view-update", // GET
         "/sinh-vien/sua", // POST
         "/sinh-vien/xoa", // GET
+        "/sinh-vien/phan-trang" // GET
 
 })
 public class SinhVienController extends HttpServlet {
@@ -30,7 +31,20 @@ public class SinhVienController extends HttpServlet {
             xoaSinhVien(req, resp);
         } else if(uri.contains("view-update")) {
             viewUpdate(req, resp);
+        } else if(uri.contains("phan-trang")) {
+            phanTrang(req, resp);
         }
+    }
+
+    private void phanTrang(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int page = 0;
+        int pageSize = 3;
+        if(req.getParameter("page") != null) {
+            page = Integer.valueOf(req.getParameter("page"));
+        }
+        req.setAttribute("page", page);
+        req.setAttribute("listSinhVien", sinhVienRepository.phanTrang(page, pageSize));
+        req.getRequestDispatcher("/buoi1/phan-trang.jsp").forward(req, resp);
     }
 
     private void viewUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
