@@ -1,7 +1,10 @@
 package com.example.sd20306sof3062.buoi2.controller;
 
+import com.example.sd20306sof3062.buoi2.dto.SinhVienRequest;
+import com.example.sd20306sof3062.buoi2.dto.SinhVienResponse;
 import com.example.sd20306sof3062.buoi2.entity.SinhVien;
 import com.example.sd20306sof3062.buoi2.repository.SinhVienRepository;
+import com.example.sd20306sof3062.buoi2.service.SinhVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +19,12 @@ public class SinhVienController {
     @Autowired
     SinhVienRepository sinhVienRepository;
 
+    @Autowired
+    SinhVienService sinhVienService;
+
     @GetMapping("/hien-thi")
-    public List<SinhVien> getAll() {
-        return sinhVienRepository.findAll();
+    public List<SinhVienResponse> getAll() {
+        return sinhVienService.getAll();
     }
 
     @GetMapping("/tim-kiem-theo-ten")
@@ -34,20 +40,20 @@ public class SinhVienController {
         return sinhVienRepository.timKiemTheoKhoangNgaySinh(batDau, ketThuc);
     }
     @PostMapping("/them")
-    public String themSinhVien(@RequestBody SinhVien sinhVien) {
-        sinhVienRepository.save(sinhVien);
+    public String themSinhVien(@RequestBody SinhVienRequest sinhVienRequest) {
+        sinhVienService.them(sinhVienRequest);
         return "them thanh cong";
     }
 
     @PutMapping("/sua")
-    public String suaSinhVien(@RequestBody SinhVien sinhVien) {
-        sinhVienRepository.save(sinhVien);
+    public String suaSinhVien(@RequestBody SinhVienRequest sinhVienRequest) {
+        sinhVienService.sua(sinhVienRequest);
         return "sua thanh cong";
     }
 
     @DeleteMapping("/xoa/{id}")
     public String xoaSinhVien(@PathVariable Integer id) {
-        sinhVienRepository.deleteById(id);
+        sinhVienService.xoa(id);
         return "xoa thanh cong";
     }
 
