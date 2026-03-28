@@ -5,10 +5,14 @@ import com.example.sd20306sof3062.buoi2.dto.SinhVienResponse;
 import com.example.sd20306sof3062.buoi2.entity.SinhVien;
 import com.example.sd20306sof3062.buoi2.repository.SinhVienRepository;
 import com.example.sd20306sof3062.buoi2.service.SinhVienService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +44,7 @@ public class SinhVienController {
         return sinhVienRepository.timKiemTheoKhoangNgaySinh(batDau, ketThuc);
     }
     @PostMapping("/them")
-    public String themSinhVien(@RequestBody SinhVienRequest sinhVienRequest) {
+    public String themSinhVien(@RequestBody @Valid SinhVienRequest sinhVienRequest) {
         sinhVienService.them(sinhVienRequest);
         return "them thanh cong";
     }

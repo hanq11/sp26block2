@@ -3,6 +3,7 @@ package com.example.sd20306sof3062.buoi2.service;
 import com.example.sd20306sof3062.buoi2.dto.SinhVienRequest;
 import com.example.sd20306sof3062.buoi2.dto.SinhVienResponse;
 import com.example.sd20306sof3062.buoi2.entity.SinhVien;
+import com.example.sd20306sof3062.buoi2.exception.ApiException;
 import com.example.sd20306sof3062.buoi2.repository.SinhVienRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class SinhVienServiceImpl implements SinhVienService{
 
     @Override
     public void xoa(Integer id) {
+//        int a = 8 / 0 ;
+        sinhVienRepository.findById(id).orElseThrow(() -> new ApiException("Khong tim duoc ID", "DELERROR"));
         sinhVienRepository.deleteById(id);
     }
 
