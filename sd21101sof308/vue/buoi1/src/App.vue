@@ -1,47 +1,64 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+let message = "SD21101"
+
+const sayHi = () => {
+  return "say hi"
+}
+let htmlCode = "<b>Hello</b>"
+let redClass = "red";
+let number = 12;
+const helloWorld = () => {
+  console.log("Hello world")
+}
+const vao = () => {
+  console.log("vao")
+}
+const ra = () => {
+  console.log("ra")
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  Hello <span>{{ message }}</span>
+  <p>{{ sayHi() }}</p>
+  <p v-html="htmlCode" :class=redClass></p>
+  <p>{{ number }} là số {{ number % 2 == 0 ? "Chẵn" : "Lẻ" }}</p>
+  <button v-on:click="helloWorld()">Click me</button>
+  <button @click="helloWorld()" @mouseenter="vao()" @mouseleave="ra()">Click me</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>John</td>
+        <td>Doe</td>
+        <td>@social</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.red {
+  color: red;
 }
 </style>
