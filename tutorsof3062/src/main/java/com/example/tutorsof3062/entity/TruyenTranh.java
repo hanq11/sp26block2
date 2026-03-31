@@ -23,7 +23,7 @@ public class TruyenTranh {
     private Integer id;
 
     @Column(name = "ten_truyen")
-    private String ten_truyen;
+    private String tenTruyen;
 
     @Column(name = "ngay_phat_hanh")
     private String ngayPhatHanh;
