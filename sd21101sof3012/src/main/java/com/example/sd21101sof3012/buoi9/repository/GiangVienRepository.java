@@ -16,4 +16,41 @@ public class GiangVienRepository {
     public List<GiangVien> getAll() {
         return session.createQuery("FROM GiangVien gv").list();
     }
+
+    public void them(GiangVien giangVien) {
+        try {
+            session.getTransaction().begin();
+            session.save(giangVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    public void sua(GiangVien giangVien) {
+        try {
+            session.getTransaction().begin();
+            session.merge(giangVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    public GiangVien getById(Integer id) {
+        return session.find(GiangVien.class, id);
+    }
+    public void xoa(Integer id) {
+        try {
+            session.getTransaction().begin();
+            session.delete(this.getById(id));
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
 }

@@ -12,6 +12,22 @@
     <title>Title</title>
 </head>
 <body>
+    Them giang vien:
+    <form action="/giang-vien/them" method="post">
+        Ten giang vien: <input type="text" name="tenGiangVien"> <br>
+        Tuoi: <input type="text" name="tuoi"> <br>
+        Gioi tinh: Nam <input type="radio" name="gioiTinh" value="true">
+        Nu <input type="radio" name="gioiTinh" value="false"> <br>
+        Truong hoc:
+            <select name="truongId">
+                <c:forEach items="${listTruongHoc}" var="th">
+                    <option value="${th.id}" label="${th.tenTruong}"></option>
+                </c:forEach>
+            </select>
+        <br>
+        <button>Save</button>
+    </form>
+    <br>
     Bang thong tin:
     <table>
         <thead>
@@ -22,6 +38,7 @@
             <th>Gioi tinh</th>
             <th>Ten truong</th>
             <th>Dia chi</th>
+            <th>Hanh dong</th>
         </tr>
         </thead>
         <tbody>
@@ -30,9 +47,13 @@
                 <td>${gv.id}</td>
                 <td>${gv.tenGiangVien}</td>
                 <td>${gv.tuoi}</td>
-                <td>${gv.gioiTinh}</td>
+                <td>${gv.gioiTinh == true ? "Nam" : "Nu"}</td>
                 <td>${gv.truongHoc.tenTruong}</td>
                 <td>${gv.truongHoc.diaChi}</td>
+                <td>
+                    <a href="/giang-vien/view-update?id=${gv.id}">View update</a>
+                    <a href="/giang-vien/xoa?id=${gv.id}">Xoa</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
