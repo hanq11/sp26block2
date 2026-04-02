@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-
+import Buoi3 from './components/Buoi3.vue'
+import VFor from './components/VFor.vue'
 // one way data binding
 let message = "hello world"
 
@@ -20,6 +21,7 @@ let person = ref({
 const increaseAge = () => {
   person.value.age++
 }
+
 </script>
 
 <template>
@@ -38,4 +40,8 @@ const increaseAge = () => {
   Name: <input type="text" v-model="person.name"><br>
   Age: <button @click="increaseAge()">Increase age</button> <br>
   Person named {{ person.name }} and {{ person.age }} yrs old
+
+  <br>
+  <Buoi3></Buoi3>
+  <VFor></VFor>
 </template>
