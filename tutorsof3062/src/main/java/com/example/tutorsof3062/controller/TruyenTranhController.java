@@ -2,11 +2,16 @@ package com.example.tutorsof3062.controller;
 
 import com.example.tutorsof3062.entity.TruyenTranh;
 import com.example.tutorsof3062.repository.TruyenTranhRepository;
+import com.example.tutorsof3062.request.TruyenTranhRequest;
+import com.example.tutorsof3062.response.TruyenTranhResponse;
 import com.example.tutorsof3062.service.TruyenTranhService;
 import com.example.tutorsof3062.service.impl.TruyenTranhServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,25 +25,25 @@ public class TruyenTranhController {
     @Autowired
     TruyenTranhService truyenTranhService;
     @GetMapping("/hien-thi")
-    public List<TruyenTranh> hienThi() {
+    public List<TruyenTranhResponse> hienThi() {
         return truyenTranhService.hienThi();
     }
 
     @PostMapping("/them")
-    public String them(@RequestBody TruyenTranh truyenTranh) {
-        truyenTranhRepository.save(truyenTranh);
+    public String them(@RequestBody @Valid TruyenTranhRequest truyenTranhRequest) {
+        truyenTranhService.them(truyenTranhRequest);
         return "them thanh cong";
     }
 
     @PutMapping("/sua")
-    public String sua(@RequestBody TruyenTranh truyenTranh) {
-        truyenTranhRepository.save(truyenTranh);
+    public String sua(@RequestBody @Valid TruyenTranhRequest truyenTranhRequest) {
+        truyenTranhService.sua(truyenTranhRequest);
         return "sua thanh cong";
     }
 
     @DeleteMapping("/xoa/{id}")
     public String xoa(@PathVariable("id") Integer id) {
-        truyenTranhRepository.deleteById(id);
+        truyenTranhService.xoa(id);
         return "xoa thanh cong";
     }
 
