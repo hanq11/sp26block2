@@ -4,8 +4,10 @@
  */
 package com.poly.sof204302.buoi10.repository;
 
+import com.poly.sof204302.buoi10.model.NganhHoc;
 import com.poly.sof204302.buoi10.model.SinhVien;
 import com.poly.sof204302.buoi10.model.SinhVienResponse;
+import com.poly.sof204302.buoi10.util.XJdbc;
 import com.poly.sof204302.buoi10.util.XQuery;
 import java.util.List;
 
@@ -42,7 +44,26 @@ public class SinhVienRepository {
                                WHERE id = ?
                          """;
     
+    private String getAllNganhHoc = """
+                                    SELECT
+                                        id, ten
+                                    FROM NganhHoc;
+                                    """;
+    
     public List<SinhVienResponse> getAll() {
         return XQuery.getBeanList(SinhVienResponse.class, getAll);
+    }
+    
+    public List<NganhHoc> getAllNganhHoc() {
+        return XQuery.getBeanList(NganhHoc.class,getAllNganhHoc);
+    }
+    
+    public void themSinhVien(SinhVien sinhVien) {
+        Object[] params = {
+            sinhVien.getTen(), 
+            sinhVien.getNamSinh(), 
+            sinhVien.getIdNganhHoc()
+        };
+        XJdbc.executeUpdate(them, params);
     }
 }
