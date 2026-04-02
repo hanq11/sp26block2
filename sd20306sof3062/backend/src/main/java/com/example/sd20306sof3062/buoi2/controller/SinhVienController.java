@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sinh-vien")
+@CrossOrigin("http://localhost:5173")
 public class SinhVienController {
     @Autowired
     SinhVienRepository sinhVienRepository;
