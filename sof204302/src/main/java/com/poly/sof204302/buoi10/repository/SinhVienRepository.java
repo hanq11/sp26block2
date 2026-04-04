@@ -66,4 +66,18 @@ public class SinhVienRepository {
         };
         XJdbc.executeUpdate(them, params);
     }
+    
+    public void suaSinhVien(SinhVien sinhVien) {
+        Object[] params = {
+            sinhVien.getTen(), 
+            sinhVien.getNamSinh(), 
+            sinhVien.getIdNganhHoc(),
+            sinhVien.getId()
+        };
+        XJdbc.executeUpdate(sua, params);
+    }
+    
+    public void xoaSinhVien(Integer id) {
+        XJdbc.executeUpdate(xoa, id);
+    }
 }

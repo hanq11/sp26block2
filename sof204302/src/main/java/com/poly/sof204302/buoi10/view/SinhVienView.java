@@ -50,7 +50,7 @@ public class SinhVienView extends javax.swing.JFrame {
     }
     
     public SinhVien getFormData() {
-        int id = Integer.valueOf(txtId.getText());
+        int id = Integer.valueOf(txtId.getText().isBlank() ? "0" : txtId.getText());
         String ten = txtTen.getText();
         int namSinh = Integer.valueOf(txtNamSinh.getText());
         
@@ -127,6 +127,11 @@ public class SinhVienView extends javax.swing.JFrame {
         cboNganhHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnThem.setText("Them");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sua");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +141,11 @@ public class SinhVienView extends javax.swing.JFrame {
         });
 
         btnXoa.setText("Xoa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,7 +216,8 @@ public class SinhVienView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNamSinhActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        sinhVienRepository.suaSinhVien(getFormData());
+        loadTableData(sinhVienRepository.getAll());
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSinhVienMouseClicked
@@ -217,6 +228,17 @@ public class SinhVienView extends javax.swing.JFrame {
         String nganhHoc = tblSinhVien.getValueAt(selectedRow, 3).toString();
         cboNganhHoc.setSelectedItem(nganhHoc);
     }//GEN-LAST:event_tblSinhVienMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        sinhVienRepository.themSinhVien(getFormData());
+        loadTableData(sinhVienRepository.getAll());
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        Integer id = Integer.valueOf(txtId.getText());
+        sinhVienRepository.xoaSinhVien(id);
+        loadTableData(sinhVienRepository.getAll());
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
