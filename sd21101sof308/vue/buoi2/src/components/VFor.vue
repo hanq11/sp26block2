@@ -30,4 +30,24 @@ const items = ref([
             </li>
         </template>
     </ul>
+
+    <h2>V-For with table</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <template v-for="item in items" :key="item.id">
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
 </template>
