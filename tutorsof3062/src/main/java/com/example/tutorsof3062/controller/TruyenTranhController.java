@@ -1,6 +1,8 @@
 package com.example.tutorsof3062.controller;
 
+import com.example.tutorsof3062.entity.CuaHang;
 import com.example.tutorsof3062.entity.TruyenTranh;
+import com.example.tutorsof3062.repository.CuaHangRepository;
 import com.example.tutorsof3062.repository.TruyenTranhRepository;
 import com.example.tutorsof3062.request.TruyenTranhRequest;
 import com.example.tutorsof3062.response.TruyenTranhResponse;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/truyen-tranh")
 public class TruyenTranhController {
     @Autowired
@@ -24,6 +27,19 @@ public class TruyenTranhController {
 
     @Autowired
     TruyenTranhService truyenTranhService;
+
+    @Autowired
+    CuaHangRepository cuaHangRepository;
+
+    @GetMapping("/hien-thi-cua-hang")
+    public List<CuaHang> hienThiCuaHang() {
+        return cuaHangRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public TruyenTranh getDetail(@PathVariable("id") Integer id) {
+        return truyenTranhRepository.findById(id).get();
+    }
     @GetMapping("/hien-thi")
     public List<TruyenTranhResponse> hienThi() {
         return truyenTranhService.hienThi();

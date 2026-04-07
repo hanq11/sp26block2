@@ -55,6 +55,7 @@ public class SecurityConfig {
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/public/**").permitAll()
+                                .requestMatchers("/truyen-tranh/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
