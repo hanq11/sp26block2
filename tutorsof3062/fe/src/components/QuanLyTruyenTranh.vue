@@ -19,11 +19,11 @@
     </div>
     <div class="mb-3">
       <label for="conHang" class="form-label me-3">ConHang: </label>
-      <input class="form-check-input" type="radio" name="conHang" id="conHang1">
+      <input class="form-check-input" type="radio" value="true" id="conHang1" v-model="truyenTranhModel.conHang">
       <label class="form-check-label" for="conHang1">
         Con
       </label>
-      <input class="form-check-input" type="radio" name="conHang" id="conHang2">
+      <input class="form-check-input" type="radio" value="false" id="conHang2" v-model="truyenTranhModel.conHang">
       <label class="form-check-label" for="conHang2">
         Het
       </label>
@@ -34,7 +34,8 @@
         <option v-for="cuaHang in listCuaHang" :value="cuaHang.id" :label="cuaHang.tenCuaHang"></option>
       </select>
     </div>
-    <button class="btn btn-primary" @click="handleAddTruyenTranh()">Save</button>
+    <button class="btn btn-primary" @click="handleAddTruyenTranh()">Them</button>
+    <button class="btn btn-secondary" @click="handleSuaTruyenTranh()">Sua</button>
   </div>
   <div class="container">
     <table class="table">
@@ -46,6 +47,7 @@
           <th scope="col">Gia</th>
           <th scope="col">Con Hang</th>
           <th scope="col">Ten Cua Hang</th>
+          <th scope="col">Hanh dong</th>
         </tr>
       </thead>
       <tbody>
@@ -54,8 +56,12 @@
           <td>{{ truyenTranh.tenTruyen }}</td>
           <td>{{ truyenTranh.ngayPhatHanh }}</td>
           <td>{{ truyenTranh.gia }}</td>
-          <td>{{ truyenTranh.conHang }}</td>
+          <td>{{ truyenTranh.conHang == true ? 'con' : 'het' }}</td>
           <td>{{ truyenTranh.cuaHang.tenCuaHang }}</td>
+          <td>
+            <button class="btn btn-secondary" @click="showDetail(truyenTranh.id)">Detail</button>
+            <button class="btn btn-danger" @click="handleXoaTruyenTranh(truyenTranh.id)">Xoa</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -64,7 +70,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { addTruyenTranh, fetchAllCuaHang, fetchAllTruyenTranh } from '@/service/TruyenTranhService';
+import { addTruyenTranh, fetchAllCuaHang, fetchAllTruyenTranh, fetchTruyenTranhById, xoaTruyenTranh, suaTruyenTranh } from '@/service/TruyenTranhService';
 
 const listTruyenTranh = ref([])
 const listCuaHang = ref([])
@@ -73,12 +79,36 @@ const truyenTranhModel = ref({
   tenTruyen: "",
   ngayPhatHanh: "",
   gia: 0,
-  conHang: false,
+  conHang: true,
   cuaHang: {
     id: "",
     tenCuaHang: ""
   }
 })
+const handleSuaTruyenTranh = async () => {
+  try {
+    await suaTruyenTranh(truyenTranhModel.value)
+    await handleFetchAllData()
+    clearForm()
+  } catch (error) {
+    console.log(error)
+  }
+}
+const handleXoaTruyenTranh = async (id) => {
+  try {
+    await xoaTruyenTranh(id)
+    await handleFetchAllData()
+  } catch (error) {
+    console.log(error)
+  }
+}
+const showDetail = async (id) => {
+  try {
+    truyenTranhModel.value = await fetchTruyenTranhById(id)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const handleFetchAllData = async () => {
   try {
@@ -107,7 +137,7 @@ const clearForm = () => {
     tenTruyen: "",
     ngayPhatHanh: "",
     gia: 0,
-    conHang: false,
+    conHang: true,
     cuaHang: {
       id: "",
       tenCuaHang: ""

@@ -50,7 +50,7 @@ export const fetchTruyenTranhById = async (id) => {
   return await response.json();
 };
 export const xoaTruyenTranh = async (id) => {
-  const response = await fetch(`${baseUrl}/xoa?id=${id}`, {
+  const response = await fetch(`${baseUrl}/xoa/${id}`, {
     method: "DELETE",
   });
   if (!response.ok) {
