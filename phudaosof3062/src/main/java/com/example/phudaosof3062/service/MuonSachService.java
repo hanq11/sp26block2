@@ -2,7 +2,9 @@ package com.example.phudaosof3062.service;
 
 import com.example.phudaosof3062.model.MuonSach;
 import com.example.phudaosof3062.repository.MuonSachRepository;
-import com.example.phudaosof3062.response.MuonSachResponse;
+import com.example.phudaosof3062.dto.MuonSachRequest;
+import com.example.phudaosof3062.dto.MuonSachResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,15 @@ public class MuonSachService {
         return muonSachRepository.getAll();
     }
 
-    public void them(MuonSach muonSach) {
+    public void them(MuonSachRequest muonSachRequest) {
+        MuonSach muonSach = new MuonSach();
+        BeanUtils.copyProperties(muonSachRequest, muonSach);
         muonSachRepository.save(muonSach);
     }
 
-    public void sua(MuonSach muonSach) {
+    public void sua(MuonSachRequest muonSachRequest) {
+        MuonSach muonSach = new MuonSach();
+        BeanUtils.copyProperties(muonSachRequest, muonSach);
         muonSachRepository.save(muonSach);
     }
 

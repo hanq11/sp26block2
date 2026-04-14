@@ -1,5 +1,6 @@
-package com.example.phudaosof3062.response;
+package com.example.phudaosof3062.dto;
 
+import com.example.phudaosof3062.model.Sach;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MuonSachResponse {
+public class MuonSachRequest {
     private Integer id;
 
     private String nguoiMuon;
@@ -18,7 +19,5 @@ public class MuonSachResponse {
 
     private Boolean daTra;
 
-    private String tenSach;
-
-    private String tacGia;
+    private Sach sach;
 }

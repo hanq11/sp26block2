@@ -1,7 +1,7 @@
 package com.example.phudaosof3062.repository;
 
 import com.example.phudaosof3062.model.MuonSach;
-import com.example.phudaosof3062.response.MuonSachResponse;
+import com.example.phudaosof3062.dto.MuonSachResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
 public interface MuonSachRepository extends JpaRepository<MuonSach, Integer> {
     @Query(
             """
-            SELECT new com.example.phudaosof3062.response.MuonSachResponse(
+            SELECT new com.example.phudaosof3062.dto.MuonSachResponse(
                 ms.id,
                 ms.nguoiMuon,
                 ms.soNgayMuon,
